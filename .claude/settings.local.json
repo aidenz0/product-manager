@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/Users/zhangzhen/experiment/product-manager/PROJECT_SUMMARY.md:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
