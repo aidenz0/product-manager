@@ -60,21 +60,117 @@
 
 ### 安装
 
+此项目支持多种AI代码助手的skill安装：
+
+#### 方式1：Claude Code 安装（推荐）
+
 ```bash
-# 克隆项目
-git clone https://github.com/your-username/product-manager.git
+# 克隆项目到本地skills目录
+git clone https://github.com/aidenz0/product-manager.git ~/.claude/skills/product-manager
+
+# 或者克隆到任意目录，然后在settings.json中配置
+git clone https://github.com/aidenz0/product-manager.git ~/product-manager
+```
+
+在 `~/.claude/settings.json` 中添加：
+
+```json
+{
+  "skills": [
+    "~/product-manager/SKILL.md"
+  ]
+}
+```
+
+#### 方式2：OpenClaw 安装
+
+```bash
+# 克隆项目到OpenClaw skills目录
+git clone https://github.com/aidenz0/product-manager.git ~/.openclaw/skills/product-manager
+
+# 或使用OpenClaw CLI安装
+openclaw skill install https://github.com/aidenz0/product-manager
+```
+
+在OpenClaw配置文件中添加skill引用：
+
+```yaml
+skills:
+  - path: ~/.openclaw/skills/product-manager/SKILL.md
+    name: product-thinking
+    enabled: true
+```
+
+#### 方式3：OpenCode 安装
+
+```bash
+# 克隆项目到OpenCode extensions目录
+git clone https://github.com/aidenz0/product-manager.git ~/.opencode/extensions/product-manager
+
+# 或使用OpenCode包管理器
+opcode extension install product-thinking https://github.com/aidenz0/product-manager
+```
+
+在OpenCode设置中启用skill：
+
+```json
+{
+  "extensions.skills": [
+    {
+      "name": "product-thinking",
+      "path": "~/.opencode/extensions/product-manager/SKILL.md",
+      "autoLoad": true
+    }
+  ]
+}
+```
+
+#### 方式4：手动安装
+
+```bash
+# 克隆项目到任意目录
+git clone https://github.com/aidenz0/product-manager.git
 cd product-manager
 ```
 
 ### 使用方式
 
-#### 方式1：作为Claude Code Skill（推荐）
+#### 在Claude Code中使用
 
-1. 将此项目放置在本地目录
-2. 在Claude Code中引用skill路径
-3. 遇到产品决策问题时，AI会自动应用此思维框架
+安装后，当遇到产品决策问题时，Claude Code会自动应用此思维框架：
 
-#### 方式2：手动参考
+```
+你：我们的用户一直要求添加社交分享功能，我们应该做吗？
+
+Claude：[自动应用product-thinking skill]
+让我们用产品思考三步法来分析这个问题...
+
+1. 澄清：真实问题是什么？
+2. 拆解：事实和约束是什么？
+3. 简化：最简方案是什么？
+4. 决策：下一步做什么？
+```
+
+#### 在OpenClaw中使用
+
+OpenClaw会自动加载skill，在产品相关对话中触发：
+
+```
+用户：帮我理清这个产品需求
+OpenClaw：[检测到product-thinking skill]
+正在使用产品思考三步法分析...
+```
+
+#### 在OpenCode中使用
+
+OpenCode会将skill集成到IDE的AI助手中：
+
+```javascript
+// 在代码注释中触发
+// TODO: 用product-thinking分析这个功能需求
+```
+
+#### 手动参考使用
 
 1. 遇到产品问题时，参考 `SKILL.md`
 2. 按照 `Workflows/` 中的四步流程思考

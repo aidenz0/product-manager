@@ -60,21 +60,117 @@ Product Problem Arises
 
 ### Installation
 
+This project supports skill installation for multiple AI code assistants:
+
+#### Method 1: Claude Code Installation (Recommended)
+
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/product-manager.git
+# Clone to local skills directory
+git clone https://github.com/aidenz0/product-manager.git ~/.claude/skills/product-manager
+
+# Or clone to any directory and configure in settings.json
+git clone https://github.com/aidenz0/product-manager.git ~/product-manager
+```
+
+Add to `~/.claude/settings.json`:
+
+```json
+{
+  "skills": [
+    "~/product-manager/SKILL.md"
+  ]
+}
+```
+
+#### Method 2: OpenClaw Installation
+
+```bash
+# Clone to OpenClaw skills directory
+git clone https://github.com/aidenz0/product-manager.git ~/.openclaw/skills/product-manager
+
+# Or use OpenClaw CLI
+openclaw skill install https://github.com/aidenz0/product-manager
+```
+
+Add skill reference in OpenClaw config:
+
+```yaml
+skills:
+  - path: ~/.openclaw/skills/product-manager/SKILL.md
+    name: product-thinking
+    enabled: true
+```
+
+#### Method 3: OpenCode Installation
+
+```bash
+# Clone to OpenCode extensions directory
+git clone https://github.com/aidenz0/product-manager.git ~/.opencode/extensions/product-manager
+
+# Or use OpenCode package manager
+opcode extension install product-thinking https://github.com/aidenz0/product-manager
+```
+
+Enable skill in OpenCode settings:
+
+```json
+{
+  "extensions.skills": [
+    {
+      "name": "product-thinking",
+      "path": "~/.opencode/extensions/product-manager/SKILL.md",
+      "autoLoad": true
+    }
+  ]
+}
+```
+
+#### Method 4: Manual Installation
+
+```bash
+# Clone to any directory
+git clone https://github.com/aidenz0/product-manager.git
 cd product-manager
 ```
 
 ### Usage
 
-#### Method 1: As a Claude Code Skill (Recommended)
+#### In Claude Code
 
-1. Place this project in a local directory
-2. Reference the skill path in Claude Code
-3. AI will automatically apply this thinking framework when encountering product decision problems
+After installation, when encountering product decision problems, Claude Code will automatically apply this thinking framework:
 
-#### Method 2: Manual Reference
+```
+You: Users are requesting social sharing features. Should we build it?
+
+Claude: [Automatically applies product-thinking skill]
+Let's analyze this problem using the Product Thinking Framework...
+
+1. Clarify: What's the real problem?
+2. Deconstruct: What are the facts and constraints?
+3. Simplify: What's the simplest solution?
+4. Decide: What's next?
+```
+
+#### In OpenClaw
+
+OpenClaw will automatically load the skill and trigger it in product-related conversations:
+
+```
+User: Help me think through this product requirement
+OpenClaw: [Detected product-thinking skill]
+Applying Product Thinking Framework to analyze...
+```
+
+#### In OpenCode
+
+OpenCode integrates the skill into the IDE's AI assistant:
+
+```javascript
+// Trigger skill in code comments
+// TODO: Use product-thinking to analyze this feature requirement
+```
+
+#### Manual Reference Usage
 
 1. When facing a product problem, refer to `SKILL.md`
 2. Think through the four-step workflow in `Workflows/`
